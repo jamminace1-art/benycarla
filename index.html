@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carla Izel · 6 Meses</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500&family=Dancing+Script:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #07090D;
+      --surface: #0D1320;
+      --sf2:     #111B2A;
+      --emerald: #1C6B46;
+      --teal:    #167068;
+      --gold:    #C8993A;
+      --white:   #EDE8DC;
+      --muted:   #58626E;
+      --line:    rgba(237,232,220,0.07);
+      --lineHi:  rgba(237,232,220,0.13);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── REVEAL ── */
+    .rv {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.75s ease-out, transform 0.75s ease-out;
+    }
+    .rv.on { opacity: 1; transform: none; }
+
+    .rv2 { transition-delay: 0.15s; }
+    .rv3 { transition-delay: 0.28s; }
+    .rv4 { transition-delay: 0.4s; }
+
+    /* ── POEM WORDS ── */
+    .w {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+    .w.on { opacity: 1; transform: none; }
+
+    /* ── SHARED SECTION LABELS ── */
+    .lbl {
+      font-size: 0.65rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--emerald);
+      font-weight: 500;
+      margin-bottom: 0.9rem;
+    }
+    .lbl-gold { color: var(--gold); }
+
+    .sec-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(2.4rem, 5vw, 4.2rem);
+      color: var(--white);
+      line-height: 1.1;
+    }
+
+    /* ════════════════════════════
+       HERO
+    ════════════════════════════ */
+    #hero {
+      height: 100vh;
+      min-height: 580px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: -25% 0;
+      background: url('./photos/IMG_6154.PNG') center top / cover no-repeat;
+      will-change: transform;
+    }
+    .hero-ov {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom,
+        rgba(7,9,13,0.42) 0%,
+        rgba(7,9,13,0.25) 45%,
+        rgba(7,9,13,0.72) 100%);
+    }
+    .hero-body {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 2rem;
+    }
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(4.5rem, 13vw, 10rem);
+      color: var(--white);
+      letter-spacing: 0.02em;
+      line-height: 1;
+      opacity: 0;
+      transform: translateY(18px);
+      animation: hFade 1.1s ease-out 0.4s forwards;
+    }
+    .hero-line {
+      width: 70px; height: 1px;
+      background: var(--gold);
+      margin: 1.6rem auto;
+      opacity: 0;
+      animation: hFade 0.7s ease-out 1.0s forwards;
+    }
+    .hero-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(1rem, 2.8vw, 1.8rem);
+      color: rgba(237,232,220,0.8);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: hFade 0.7s ease-out 1.25s forwards;
+    }
+    .hero-dates {
+      font-size: clamp(0.6rem, 1.4vw, 0.78rem);
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 0.9rem;
+      opacity: 0;
+      animation: hFade 0.7s ease-out 1.55s forwards;
+    }
+    @keyframes hFade { to { opacity: 1; transform: none; } }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.2rem; left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      opacity: 0;
+      animation: hFade 0.7s ease-out 2.1s forwards;
+    }
+    .hero-scroll span {
+      font-size: 0.6rem;
+      letter-spacing: 0.28em;
+      color: rgba(237,232,220,0.35);
+      text-transform: uppercase;
+    }
+    .scroll-bar {
+      width: 1px; height: 38px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: sBar 2.2s ease-in-out infinite;
+    }
+    @keyframes sBar {
+      0%,100% { opacity: 0.35; }
+      50% { opacity: 0.85; }
+    }
+
+    /* ════════════════════════════
+       POEM BREAKS
+    ════════════════════════════ */
+    .poem {
+      min-height: 65vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10vh 8vw;
+      background: var(--surface);
+    }
+    .poem.dk { background: var(--black); }
+    .poem-inner { max-width: 780px; text-align: center; }
+    .poem-ln {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(1.6rem, 3.8vw, 2.9rem);
+      color: var(--white);
+      line-height: 1.55;
+      margin-bottom: 0.1em;
+    }
+
+    /* TE AMO special */
+    #teamo {
+      min-height: 100vh;
+      background: var(--black);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10vh 6vw;
+    }
+    .teamo-wrap { text-align: center; }
+    .teamo-big {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(5.5rem, 17vw, 14rem);
+      color: var(--gold);
+      line-height: 0.88;
+      letter-spacing: -0.01em;
+    }
+    .teamo-ln {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(1.2rem, 2.8vw, 2rem);
+      color: rgba(237,232,220,0.6);
+      margin-top: 1.1rem;
+      letter-spacing: 0.02em;
+    }
+
+    /* ════════════════════════════
+       NUESTRA HISTORIA
+    ════════════════════════════ */
+    #historia {
+      padding: 11vh 8vw;
+      background: var(--black);
+    }
+    .historia-grid {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5.5rem;
+      align-items: center;
+    }
+    .historia-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 2rem;
+    }
+    .historia-body {
+      font-size: 0.97rem;
+      line-height: 1.95;
+      color: rgba(237,232,220,0.58);
+      font-weight: 300;
+      max-width: 50ch;
+    }
+    .historia-body p + p { margin-top: 1.1rem; }
+    .historia-img-wrap { position: relative; }
+    .historia-img-wrap::before {
+      content: '';
+      position: absolute;
+      top: -10px; left: -10px;
+      right: 10px; bottom: 10px;
+      border: 1px solid var(--emerald);
+      pointer-events: none;
+    }
+    .historia-img-wrap img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      display: block;
+      position: relative;
+    }
+
+    /* ════════════════════════════
+       ELLA ES MI TODO
+    ════════════════════════════ */
+    #ella {
+      padding: 11vh 8vw;
+      background: var(--surface);
+    }
+    .sec-head {
+      max-width: 1080px;
+      margin: 0 auto 3.5rem;
+    }
+    .cards {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--line);
+    }
+    .card {
+      background: var(--sf2);
+      padding: 1.9rem 2rem;
+      border: none;
+      transition: background 0.3s;
+    }
+    .card:hover { background: #141e2e; }
+    .card.span2 { grid-column: span 2; }
+    .card-ico {
+      font-size: 1rem;
+      margin-bottom: 0.7rem;
+      display: block;
+    }
+    .card-lbl {
+      font-size: 0.6rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.45rem;
+      font-weight: 500;
+    }
+    .card-val {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1.5;
+    }
+    .card-val.it { font-style: italic; }
+
+    /* ════════════════════════════
+       TIMELINE
+    ════════════════════════════ */
+    #timeline {
+      padding: 11vh 8vw;
+      background: var(--black);
+    }
+    .tl-wrap {
+      max-width: 820px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .tl-spine {
+      position: absolute;
+      left: 50%; top: 0; bottom: 0;
+      width: 1px;
+      background: var(--lineHi);
+      transform: translateX(-50%);
+    }
+    .tl-row {
+      display: grid;
+      grid-template-columns: 1fr 28px 1fr;
+      align-items: flex-start;
+      margin-bottom: 3rem;
+    }
+    .tl-dot-col {
+      display: flex;
+      justify-content: center;
+      padding-top: 6px;
+      position: relative;
+      z-index: 2;
+    }
+    .tl-dot {
+      width: 11px; height: 11px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: 2px solid var(--gold);
+      box-shadow: 0 0 0 5px rgba(200,153,58,0.1), 0 0 18px rgba(200,153,58,0.28);
+      flex-shrink: 0;
+    }
+    .tl-dot.fut {
+      background: transparent;
+      border-color: var(--teal);
+      box-shadow: 0 0 0 4px rgba(22,112,104,0.08);
+      opacity: 0.5;
+    }
+    .tl-dot.today {
+      width: 14px; height: 14px;
+      box-shadow: 0 0 0 6px rgba(200,153,58,0.18), 0 0 28px rgba(200,153,58,0.45);
+    }
+    .tl-L { text-align: right; padding-right: 1.8rem; }
+    .tl-R { text-align: left; padding-left: 1.8rem; }
+    .tl-card {
+      display: inline-block;
+      padding: 1.1rem 1.4rem;
+      background: var(--sf2);
+      border: 1px solid var(--line);
+      max-width: 290px;
+    }
+    .tl-card.today-card { border-color: rgba(200,153,58,0.22); }
+    .tl-date {
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+    }
+    .tl-event {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: var(--white);
+      line-height: 1.35;
+    }
+    .tl-event.today { color: var(--gold); font-size: 1.2rem; }
+    .tl-event.fut-ev {
+      font-style: italic;
+      color: rgba(237,232,220,0.35);
+      font-size: 1rem;
+    }
+    .tl-pronto {
+      font-size: 0.58rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--teal);
+      opacity: 0.55;
+      margin-bottom: 0.25rem;
+    }
+
+    .tl-future-sep {
+      margin: 1rem 0 2.5rem;
+      text-align: center;
+      position: relative;
+    }
+    .tl-future-sep::before {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      top: 50%;
+      height: 1px;
+      background: repeating-linear-gradient(to right,
+        var(--teal) 0, var(--teal) 3px, transparent 3px, transparent 10px);
+      opacity: 0.25;
+    }
+    .tl-future-sep span {
+      position: relative;
+      background: var(--black);
+      padding: 0 1rem;
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--teal);
+      opacity: 0.7;
+    }
+
+    /* ════════════════════════════
+       GALLERY
+    ════════════════════════════ */
+    #galeria {
+      padding: 11vh 0;
+      background: var(--surface);
+    }
+    .gal-head {
+      padding: 0 8vw 3rem;
+    }
+    .gal-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+    }
+    .gal-item {
+      aspect-ratio: 4/5;
+      overflow: hidden;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.55s ease-out, transform 0.55s ease-out;
+    }
+    .gal-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.75s cubic-bezier(.25,.46,.45,.94);
+    }
+    .gal-item:hover img { transform: scale(1.05); }
+
+    /* LIGHTBOX */
+    #lb {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0,0,0,0.96);
+      backdrop-filter: blur(10px);
+      align-items: center;
+      justify-content: center;
+    }
+    #lb.open { display: flex; }
+    #lb img {
+      max-width: 88vw;
+      max-height: 88vh;
+      object-fit: contain;
+    }
+    .lb-x {
+      position: absolute;
+      top: 1.4rem; right: 1.8rem;
+      background: none; border: none;
+      color: rgba(237,232,220,0.4);
+      font-size: 1.3rem;
+      cursor: pointer;
+      transition: color 0.2s;
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      z-index: 2;
+      line-height: 1;
+    }
+    .lb-x:hover { color: var(--white); }
+    .lb-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none; border: none;
+      color: rgba(237,232,220,0.3);
+      font-size: 1.4rem;
+      cursor: pointer;
+      transition: color 0.2s;
+      padding: 1.2rem;
+      z-index: 2;
+    }
+    .lb-arrow:hover { color: var(--white); }
+    .lb-prev { left: 0.5rem; }
+    .lb-next { right: 0.5rem; }
+    .lb-count {
+      position: absolute;
+      bottom: 1.4rem; right: 1.8rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      color: rgba(237,232,220,0.28);
+    }
+
+    /* ════════════════════════════
+       LLAMADAS
+    ════════════════════════════ */
+    #llamadas {
+      padding: 11vh 8vw;
+      background: var(--black);
+    }
+    .vid-wrap {
+      max-width: 880px;
+      margin: 0 auto;
+    }
+    .vid-wrap video {
+      width: 100%;
+      display: block;
+      outline: none;
+    }
+    .vid-caption {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 1.4rem;
+    }
+
+    /* ════════════════════════════
+       SUEÑOS JUNTOS
+    ════════════════════════════ */
+    #suenos {
+      padding: 11vh 8vw;
+      background: var(--surface);
+    }
+    .suenos-inner { max-width: 1080px; margin: 0 auto; }
+
+    .travel-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--lineHi);
+      border: 1px solid var(--lineHi);
+      margin-bottom: 5rem;
+    }
+    .travel-card {
+      background: var(--sf2);
+      padding: 2.2rem 1.8rem;
+      text-align: center;
+      transition: background 0.3s;
+    }
+    .travel-card:hover { background: rgba(28,107,70,0.08); }
+    .travel-arr {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      color: var(--teal);
+      margin-bottom: 0.7rem;
+    }
+    .travel-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.45rem;
+      font-weight: 300;
+      color: var(--white);
+    }
+    .travel-sub {
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-top: 0.25rem;
+    }
+
+    .bucket-sec { margin-bottom: 3rem; }
+    .bucket-lbl {
+      font-size: 0.62rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 500;
+      padding-bottom: 0.9rem;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 1.4rem;
+    }
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.42rem 0.9rem;
+      border: 1px solid var(--lineHi);
+      font-size: 0.78rem;
+      color: rgba(237,232,220,0.55);
+      font-weight: 300;
+      transition: border-color 0.22s, color 0.22s;
+      cursor: default;
+    }
+    .pill:hover {
+      border-color: var(--emerald);
+      color: var(--white);
+    }
+    .pill::before {
+      content: '○';
+      font-size: 0.5rem;
+      color: var(--emerald);
+      opacity: 0.55;
+    }
+
+    /* ════════════════════════════
+       ACTIVITY PHOTO CARDS
+    ════════════════════════════ */
+    .act-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+      gap: 3px;
+      margin-bottom: 0.5rem;
+    }
+    .act-card {
+      position: relative;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      cursor: default;
+      background: var(--sf2);
+    }
+    .act-photo {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.75s cubic-bezier(.25,.46,.45,.94);
+      filter: brightness(0.65) saturate(0.85);
+    }
+    .act-card:hover .act-photo {
+      transform: scale(1.07);
+      filter: brightness(0.45) saturate(0.9);
+    }
+    .act-ov {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(7,9,13,0.88) 0%, rgba(7,9,13,0.1) 55%);
+    }
+    .act-nm {
+      position: absolute;
+      bottom: 0.65rem;
+      left: 0.75rem;
+      right: 0.75rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.92rem;
+      color: var(--white);
+      line-height: 1.3;
+      z-index: 1;
+    }
+
+    /* ════════════════════════════
+       PRIMERA CONVERSACIÓN
+    ════════════════════════════ */
+    #primera-conv {
+      padding: 11vh 8vw;
+      background: var(--sf2);
+      border-top: 1px solid var(--line);
+    }
+    .pconv-inner {
+      max-width: 880px;
+      margin: 0 auto;
+    }
+    .pconv-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.62rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.9rem;
+    }
+    .pconv-tag::before {
+      content: '';
+      display: block;
+      width: 22px; height: 1px;
+      background: var(--gold);
+    }
+    .pconv-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(2rem, 4.5vw, 3.5rem);
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .pconv-desc {
+      font-size: 0.92rem;
+      color: rgba(237,232,220,0.45);
+      font-weight: 300;
+      margin-bottom: 2.5rem;
+      max-width: 52ch;
+      line-height: 1.8;
+    }
+
+    /* ════════════════════════════
+       CARTA
+    ════════════════════════════ */
+    #carta {
+      padding: 11vh 8vw;
+      background: var(--black);
+    }
+    .carta-wrap {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .carta-paper {
+      background: #F4ECDB;
+      padding: 3.8rem 3.2rem;
+    }
+    .carta-seal {
+      display: block;
+      width: 40px; height: 40px;
+      margin: 0 auto 1.6rem;
+    }
+    .carta-hr {
+      width: 36px; height: 1px;
+      background: rgba(10,10,10,0.2);
+      margin: 0 auto 2rem;
+    }
+    .carta-to {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.35rem;
+      color: #1a1a1a;
+      margin-bottom: 1.5rem;
+    }
+    .carta-body {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.15rem;
+      color: #252525;
+      line-height: 2;
+    }
+    .carta-body p + p { margin-top: 1.1rem; }
+    .carta-sig {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.75rem;
+      color: #1a1a1a;
+      margin-top: 2.5rem;
+      text-align: right;
+    }
+
+    /* ════════════════════════════
+       FOOTER
+    ════════════════════════════ */
+    footer {
+      padding: 4rem 8vw;
+      background: var(--surface);
+      border-top: 1px solid var(--line);
+      text-align: center;
+    }
+    .ft-names {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.35rem;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+    .ft-song {
+      font-size: 0.67rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.35rem;
+    }
+    .ft-love {
+      font-size: 0.73rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    /* ════════════════════════════
+       RESPONSIVE
+    ════════════════════════════ */
+    @media (max-width: 900px) {
+      .historia-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .historia-img-wrap { order: -1; max-width: 360px; margin: 0 auto; }
+      .cards { grid-template-columns: repeat(2, 1fr); }
+      .card.span2 { grid-column: span 1; }
+      .travel-row { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .gal-grid { grid-template-columns: repeat(2, 1fr); }
+      .travel-row { grid-template-columns: 1fr 1fr; }
+      .cards { grid-template-columns: 1fr; }
+      .tl-spine { left: 12px; transform: none; }
+      .tl-row { grid-template-columns: 20px 1fr; }
+      .tl-dot-col { grid-column: 1; grid-row: 1; }
+      .tl-L, .tl-R {
+        grid-column: 2;
+        grid-row: 1;
+        text-align: left;
+        padding-left: 1.2rem;
+        padding-right: 0;
+      }
+      .tl-card { max-width: 100%; width: 100%; }
+      .tl-future-sep span { background: var(--black); }
+    }
+    @media (max-width: 420px) {
+      .gal-grid { grid-template-columns: 1fr; }
+      .carta-paper { padding: 2.5rem 1.8rem; }
+      .travel-row { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .rv, .w, .hero-name, .hero-line, .hero-sub, .hero-dates, .hero-scroll {
+        opacity: 1 !important; transform: none !important; animation: none !important;
+        transition: none !important;
+      }
+      .gal-item { opacity: 1 !important; transform: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section id="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-ov"></div>
+  <div class="hero-body">
+    <h1 class="hero-name">Carla Izel</h1>
+    <div class="hero-line"></div>
+    <p class="hero-sub">6 Meses Contigo</p>
+    <p class="hero-dates">9 dic 2025 &nbsp;·&nbsp; 9 jun 2026</p>
+  </div>
+  <div class="hero-scroll">
+    <span>Nuestra historia</span>
+    <div class="scroll-bar"></div>
+  </div>
+</section>
+
+<!-- ═══════════ POEM 1 ═══════════ -->
+<section class="poem dk" data-poem>
+  <div class="poem-inner">
+    <span class="poem-ln">
+      <span class="w">Fue</span> <span class="w">un</span> <span class="w">mensaje</span> <span class="w">de</span> <span class="w">texto.</span>
+    </span>
+    <span class="poem-ln">
+      <span class="w">Pero</span> <span class="w">lo</span> <span class="w">cambió</span> <span class="w">todo.</span>
+    </span>
+  </div>
+</section>
+
+<!-- ═══════════ HISTORIA ═══════════ -->
+<section id="historia">
+  <div class="historia-grid">
+    <div>
+      <p class="lbl rv">Nuestra historia</p>
+      <h2 class="historia-heading rv rv2">Todo comenzó<br>con un hola.</h2>
+      <div class="historia-body rv rv3">
+        <p>El 9 de diciembre de 2025, un mensaje llegó. No sabías que ese "hola" iba a cambiar todo. Lo que empezó como palabras en una pantalla se fue convirtiendo en llamadas que duraban horas, en risas que cruzaban fronteras, en esos "te pienso" que encontraban el camino desde Utah hasta Puebla.</p>
+        <p>En la distancia aprendí a conocerte. Aprendí tus libros, tu amor por los chilaquiles, la forma en que ves el mundo con esos ojos que no me canso de ver. En cada llamada, en cada silencio, me convencí de que encontrarte fue lo más bonito que me ha pasado.</p>
+        <p>Hoy celebramos seis meses. Y esto es solo el principio.</p>
+      </div>
+    </div>
+    <div class="historia-img-wrap rv rv2">
+      <img src="./photos/IMG_6147.PNG" alt="Ben y Carla" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ POEM 2 ═══════════ -->
+<section class="poem" data-poem>
+  <div class="poem-inner">
+    <span class="poem-ln">
+      <span class="w">Te</span> <span class="w">veo</span> <span class="w">en</span> <span class="w">cada</span> <span class="w">atardecer,</span>
+    </span>
+    <span class="poem-ln">
+      <span class="w">en</span> <span class="w">cada</span> <span class="w">niño</span> <span class="w">que</span> <span class="w">sonría,</span>
+    </span>
+    <span class="poem-ln">
+      <span class="w">en</span> <span class="w">cada</span> <span class="w">escritura</span> <span class="w">y</span> <span class="w">canción.</span>
+    </span>
+  </div>
+</section>
+
+<!-- ═══════════ ELLA ES MI TODO ═══════════ -->
+<section id="ella">
+  <div class="sec-head rv">
+    <p class="lbl lbl-gold">Así eres tú</p>
+    <h2 class="sec-title">Ella es mi todo</h2>
+  </div>
+  <div class="cards" style="max-width:1080px;margin:0 auto;">
+    <div class="card rv"><span class="card-ico">✦</span><p class="card-lbl">Cumpleaños</p><p class="card-val">17 de agosto</p></div>
+    <div class="card rv rv2"><span class="card-ico">🌿</span><p class="card-lbl">Personalidad</p><p class="card-val">INFP-T — La Mediadora</p></div>
+    <div class="card rv rv3"><span class="card-ico">🎵</span><p class="card-lbl">Canción favorita</p><p class="card-val it">"La Distancia" — Manuel Medrano</p></div>
+    <div class="card span2 rv"><span class="card-ico">📖</span><p class="card-lbl">Sus libros favoritos</p><p class="card-val">Pride & Prejudice · La Biblioteca de la Media Noche · Almendra · Un Monstruo Viene a Verme · Nada Termina Pero Hay Que Decir Adiós</p></div>
+    <div class="card rv rv2"><span class="card-ico">📍</span><p class="card-lbl">Hogar</p><p class="card-val">San Pedro Cholula, Puebla</p></div>
+    <div class="card rv"><span class="card-ico">🍳</span><p class="card-lbl">Comida favorita</p><p class="card-val">Chilaquiles</p></div>
+    <div class="card rv rv2"><span class="card-ico">🍦</span><p class="card-lbl">Helado</p><p class="card-val">Zarzamora · Taro · Fresa</p></div>
+    <div class="card rv rv3"><span class="card-ico">🍫</span><p class="card-lbl">Chocolates</p><p class="card-val">Ferrero · Toblerone</p></div>
+    <div class="card rv"><span class="card-ico">💚</span><p class="card-lbl">Mejor amiga</p><p class="card-val">Liz</p></div>
+    <div class="card rv rv2"><span class="card-ico">🌟</span><p class="card-lbl">Hermanos</p><p class="card-val">Carlos (25) · Aram (18, en misión)</p></div>
+    <div class="card rv rv3"><span class="card-ico">🥣</span><p class="card-lbl">Cereal</p><p class="card-val">Corn Flakes · Zucaritas</p></div>
+    <div class="card rv"><span class="card-ico">✦</span><p class="card-lbl">Frase que la define</p><p class="card-val it">"Consider the Lilies"</p></div>
+  </div>
+</section>
+
+<!-- ═══════════ POEM 3 ═══════════ -->
+<section class="poem dk" data-poem>
+  <div class="poem-inner">
+    <span class="poem-ln"><span class="w">Kilómetros</span> <span class="w">de</span> <span class="w">distancia.</span></span>
+    <span class="poem-ln"><span class="w">Pero</span> <span class="w">cada</span> <span class="w">llamada</span> <span class="w">fue</span> <span class="w">un</span> <span class="w">abrazo.</span></span>
+    <span class="poem-ln"><span class="w">Te</span> <span class="w">amo</span> <span class="w">con</span> <span class="w">todo</span> <span class="w">mi</span> <span class="w">corazón.</span></span>
+  </div>
+</section>
+
+<!-- ═══════════ TIMELINE ═══════════ -->
+<section id="timeline">
+  <div class="sec-head rv" style="max-width:820px;margin:0 auto 3.5rem;">
+    <p class="lbl">Desde el principio</p>
+    <h2 class="sec-title">Nuestros primeros</h2>
+  </div>
+  <div class="tl-wrap">
+    <div class="tl-spine"></div>
+
+    <div class="tl-row rv">
+      <div class="tl-L"><div class="tl-card"><p class="tl-date">9 dic 2025</p><p class="tl-event">Primer día de texto</p></div></div>
+      <div class="tl-dot-col"><div class="tl-dot"></div></div>
+      <div class="tl-R"></div>
+    </div>
+
+    <div class="tl-row rv">
+      <div class="tl-L"></div>
+      <div class="tl-dot-col"><div class="tl-dot"></div></div>
+      <div class="tl-R"><div class="tl-card"><p class="tl-date">14 dic 2025</p><p class="tl-event">Primer texto en WhatsApp</p></div></div>
+    </div>
+
+    <div class="tl-row rv">
+      <div class="tl-L"><div class="tl-card"><p class="tl-date">5 ene 2026</p><p class="tl-event">Primera llamada</p></div></div>
+      <div class="tl-dot-col"><div class="tl-dot"></div></div>
+      <div class="tl-R"></div>
+    </div>
+
+    <div class="tl-row rv">
+      <div class="tl-L"></div>
+      <div class="tl-dot-col"><div class="tl-dot"></div></div>
+      <div class="tl-R"><div class="tl-card"><p class="tl-date">26 mayo 2026</p><p class="tl-event">Primera vez que dijimos <em>"Te amo"</em></p></div></div>
+    </div>
+
+    <div class="tl-row rv">
+      <div class="tl-L"><div class="tl-card today-card"><p class="tl-date">✦ &nbsp;Hoy · 9 jun 2026</p><p class="tl-event today">Nuestro aniversario de 6 meses</p></div></div>
+      <div class="tl-dot-col"><div class="tl-dot today"></div></div>
+      <div class="tl-R"></div>
+    </div>
+
+    <!-- FUTURE -->
+    <div class="tl-future-sep rv"><span>Lo que viene</span></div>
+
+    <div class="tl-row rv">
+      <div class="tl-L"></div>
+      <div class="tl-dot-col"><div class="tl-dot fut"></div></div>
+      <div class="tl-R"><div class="tl-card"><p class="tl-pronto">Próximamente</p><p class="tl-event fut-ev">Día de visitar México juntos</p></div></div>
+    </div>
+    <div class="tl-row rv">
+      <div class="tl-L"><div class="tl-card"><p class="tl-pronto">Próximamente</p><p class="tl-event fut-ev">Primera cita</p></div></div>
+      <div class="tl-dot-col"><div class="tl-dot fut"></div></div>
+      <div class="tl-R"></div>
+    </div>
+    <div class="tl-row rv">
+      <div class="tl-L"></div>
+      <div class="tl-dot-col"><div class="tl-dot fut"></div></div>
+      <div class="tl-R"><div class="tl-card"><p class="tl-pronto">Próximamente</p><p class="tl-event fut-ev">Primer beso</p></div></div>
+    </div>
+    <div class="tl-row rv">
+      <div class="tl-L"><div class="tl-card"><p class="tl-pronto">Próximamente</p><p class="tl-event fut-ev">Conocer a la familia de Carla</p></div></div>
+      <div class="tl-dot-col"><div class="tl-dot fut"></div></div>
+      <div class="tl-R"></div>
+    </div>
+    <div class="tl-row rv">
+      <div class="tl-L"></div>
+      <div class="tl-dot-col"><div class="tl-dot fut"></div></div>
+      <div class="tl-R"><div class="tl-card"><p class="tl-pronto">Próximamente</p><p class="tl-event fut-ev">Irnos al templo juntos</p></div></div>
+    </div>
+    <div class="tl-row rv">
+      <div class="tl-L"><div class="tl-card"><p class="tl-pronto">Próximamente</p><p class="tl-event fut-ev">El día que vengas a los Estados Unidos</p></div></div>
+      <div class="tl-dot-col"><div class="tl-dot fut"></div></div>
+      <div class="tl-R"></div>
+    </div>
+    <div class="tl-row rv">
+      <div class="tl-L"></div>
+      <div class="tl-dot-col"><div class="tl-dot fut"></div></div>
+      <div class="tl-R"><div class="tl-card"><p class="tl-pronto">Próximamente</p><p class="tl-event fut-ev">Conocer a la familia de Ben</p></div></div>
+    </div>
+    <div class="tl-row rv">
+      <div class="tl-L"><div class="tl-card"><p class="tl-pronto">Próximamente</p><p class="tl-event fut-ev">El día que te pida que seas mía para siempre</p></div></div>
+      <div class="tl-dot-col"><div class="tl-dot fut"></div></div>
+      <div class="tl-R"></div>
+    </div>
+    <div class="tl-row rv">
+      <div class="tl-L"></div>
+      <div class="tl-dot-col"><div class="tl-dot fut"></div></div>
+      <div class="tl-R"><div class="tl-card"><p class="tl-pronto">Próximamente</p><p class="tl-event fut-ev">El día que nos casemos en el templo</p></div></div>
+    </div>
+    <div class="tl-row rv">
+      <div class="tl-L"><div class="tl-card"><p class="tl-pronto">Próximamente</p><p class="tl-event fut-ev">Nuestra noche de miel</p></div></div>
+      <div class="tl-dot-col"><div class="tl-dot fut"></div></div>
+      <div class="tl-R"></div>
+    </div>
+    <div class="tl-row rv">
+      <div class="tl-L"></div>
+      <div class="tl-dot-col"><div class="tl-dot fut"></div></div>
+      <div class="tl-R"><div class="tl-card"><p class="tl-pronto">Próximamente</p><p class="tl-event fut-ev">El día de nuestro primer hijo</p></div></div>
+    </div>
+    <div class="tl-row rv">
+      <div class="tl-L"><div class="tl-card"><p class="tl-pronto">Próximamente</p><p class="tl-event fut-ev">El día de nuestro primer nieto</p></div></div>
+      <div class="tl-dot-col"><div class="tl-dot fut"></div></div>
+      <div class="tl-R"></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════ NUESTRA PRIMERA CONVERSACIÓN ═══════════ -->
+<section id="primera-conv">
+  <div class="pconv-inner">
+    <div class="rv">
+      <p class="pconv-tag">Un momento especial</p>
+      <h2 class="pconv-title">Nuestra primera conversación</h2>
+      <p class="pconv-desc">Antes de las llamadas, antes del "te amo" — hubo una conversación que lo empezó todo. Aquí está.</p>
+    </div>
+    <div class="vid-wrap rv rv2" style="max-width:580px;">
+      <video controls preload="metadata" playsinline>
+        <source src="./videos/primera-convo.mp4" type="video/mp4">
+      </video>
+      <p class="vid-caption">El principio de todo</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ POEM 4 ═══════════ -->
+<section class="poem" data-poem>
+  <div class="poem-inner">
+    <span class="poem-ln"><span class="w">Cada</span> <span class="w">foto</span> <span class="w">guarda</span> <span class="w">un</span> <span class="w">segundo</span></span>
+    <span class="poem-ln"><span class="w">que</span> <span class="w">nunca</span> <span class="w">se</span> <span class="w">volverá</span> <span class="w">a</span> <span class="w">repetir.</span></span>
+    <span class="poem-ln"><span class="w">Y</span> <span class="w">los</span> <span class="w">dos</span> <span class="w">estábamos</span> <span class="w">ahí.</span></span>
+  </div>
+</section>
+
+<!-- ═══════════ GALLERY ═══════════ -->
+<section id="galeria">
+  <div class="gal-head">
+    <div class="rv">
+      <p class="lbl">Momentos</p>
+      <h2 class="sec-title">Galería de recuerdos</h2>
+    </div>
+  </div>
+  <div class="gal-grid" id="galGrid">
+    <div class="gal-item" data-i="0"><img src="./photos/IMG_5924.PNG" alt="" loading="lazy"></div>
+    <div class="gal-item" data-i="1"><img src="./photos/IMG_5953.PNG" alt="" loading="lazy"></div>
+    <div class="gal-item" data-i="2"><img src="./photos/IMG_6014.PNG" alt="" loading="lazy"></div>
+    <div class="gal-item" data-i="3"><img src="./photos/IMG_6015.PNG" alt="" loading="lazy"></div>
+    <div class="gal-item" data-i="4"><img src="./photos/IMG_6016.PNG" alt="" loading="lazy"></div>
+    <div class="gal-item" data-i="5"><img src="./photos/IMG_6124.PNG" alt="" loading="lazy"></div>
+    <div class="gal-item" data-i="6"><img src="./photos/IMG_6125.PNG" alt="" loading="lazy"></div>
+    <div class="gal-item" data-i="7"><img src="./photos/IMG_6126.PNG" alt="" loading="lazy"></div>
+    <div class="gal-item" data-i="8"><img src="./photos/IMG_6127.PNG" alt="" loading="lazy"></div>
+    <div class="gal-item" data-i="9"><img src="./photos/IMG_6128.PNG" alt="" loading="lazy"></div>
+    <div class="gal-item" data-i="10"><img src="./photos/IMG_6129.PNG" alt="" loading="lazy"></div>
+    <div class="gal-item" data-i="11"><img src="./photos/IMG_6147.PNG" alt="" loading="lazy"></div>
+    <div class="gal-item" data-i="12"><img src="./photos/IMG_6148.PNG" alt="" loading="lazy"></div>
+    <div class="gal-item" data-i="13"><img src="./photos/IMG_6151.JPG" alt="" loading="lazy"></div>
+    <div class="gal-item" data-i="14"><img src="./photos/IMG_6152.JPG" alt="" loading="lazy"></div>
+    <div class="gal-item" data-i="15"><img src="./photos/IMG_6153.PNG" alt="" loading="lazy"></div>
+    <div class="gal-item" data-i="16"><img src="./photos/IMG_6154.PNG" alt="" loading="lazy"></div>
+    <div class="gal-item" data-i="17"><img src="./photos/carla/IMG_5251.JPG" alt="" loading="lazy"></div>
+    <div class="gal-item" data-i="18"><img src="./photos/carla/IMG_5252.JPG" alt="" loading="lazy"></div>
+    <div class="gal-item" data-i="19"><img src="./photos/carla/IMG_5253.JPG" alt="" loading="lazy"></div>
+    <div class="gal-item" data-i="20"><img src="./photos/carla/IMG_5851.PNG" alt="" loading="lazy"></div>
+    <div class="gal-item" data-i="21"><img src="./photos/carla/IMG_5908.PNG" alt="" loading="lazy"></div>
+    <div class="gal-item" data-i="22"><img src="./photos/carla/09ebbb0e-0257-4ac1-a06a-e12f0ad7bcc9.JPG" alt="" loading="lazy"></div>
+    <div class="gal-item" data-i="23"><img src="./photos/carla/a47541c4-8b55-4371-87fa-569f0f3aaf49.JPG" alt="" loading="lazy"></div>
+    <div class="gal-item" data-i="24"><img src="./photos/carla/a5b219e7-4c53-41d8-b7a3-86b88fb33274.JPG" alt="" loading="lazy"></div>
+    <div class="gal-item" data-i="25"><img src="./photos/carla/af99ad38-6698-48ef-92f1-ea25cc57ea1d.JPG" alt="" loading="lazy"></div>
+    <div class="gal-item" data-i="26"><img src="./photos/carla/be79f80e-342a-49be-8ad3-b7ee86ca22c3.JPG" alt="" loading="lazy"></div>
+    <div class="gal-item" data-i="27"><img src="./photos/carla/cd0927cb-63c6-43e4-ac0b-d6fb4b328490.JPG" alt="" loading="lazy"></div>
+    <div class="gal-item" data-i="28"><img src="./photos/carla/fc6c9277-93d7-4340-94e2-d4f4d6e39519.JPG" alt="" loading="lazy"></div>
+    <div class="gal-item" data-i="29"><img src="./photos/carla/IMG_6157.jpg" alt="" loading="lazy"></div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div id="lb">
+  <button class="lb-x" id="lbX">✕</button>
+  <button class="lb-arrow lb-prev" id="lbPrev">&#8592;</button>
+  <img id="lbImg" src="" alt="">
+  <button class="lb-arrow lb-next" id="lbNext">&#8594;</button>
+  <p class="lb-count" id="lbCount"></p>
+</div>
+
+<!-- ═══════════ POEM 5 ═══════════ -->
+<section class="poem dk" data-poem>
+  <div class="poem-inner">
+    <span class="poem-ln"><span class="w">Horas</span> <span class="w">y</span> <span class="w">horas</span> <span class="w">en</span> <span class="w">pantalla.</span></span>
+    <span class="poem-ln"><span class="w">Aprendí</span> <span class="w">tus</span> <span class="w">gestos,</span> <span class="w">tu</span> <span class="w">risa,</span></span>
+    <span class="poem-ln"><span class="w">el</span> <span class="w">sonido</span> <span class="w">de</span> <span class="w">tu</span> <span class="w">voz.</span></span>
+    <span class="poem-ln" style="margin-top:0.4em;"><span class="w">Eres</span> <span class="w">mi</span> <span class="w">favorita.</span></span>
+  </div>
+</section>
+
+<!-- ═══════════ LLAMADAS ═══════════ -->
+<section id="llamadas">
+  <div class="sec-head rv" style="max-width:880px;margin:0 auto 2.5rem;">
+    <p class="lbl">En pantalla</p>
+    <h2 class="sec-title">Nuestras llamadas</h2>
+  </div>
+  <div class="vid-wrap rv rv2">
+    <video controls preload="metadata" playsinline>
+      <source src="./videos/calls.mp4" type="video/mp4">
+    </video>
+    <p class="vid-caption">Cada llamada fue un abrazo a distancia</p>
+  </div>
+</section>
+
+<!-- ═══════════ POEM 6 ═══════════ -->
+<section class="poem" data-poem>
+  <div class="poem-inner">
+    <span class="poem-ln"><span class="w">No</span> <span class="w">sé</span> <span class="w">qué</span> <span class="w">nos</span> <span class="w">espera.</span></span>
+    <span class="poem-ln"><span class="w">Pero</span> <span class="w">sé</span> <span class="w">que</span> <span class="w">quiero</span> <span class="w">que</span> <span class="w">seas</span> <span class="w">tú</span></span>
+    <span class="poem-ln"><span class="w">quien</span> <span class="w">esté</span> <span class="w">ahí</span> <span class="w">cuando</span> <span class="w">llegue.</span></span>
+  </div>
+</section>
+
+<!-- ═══════════ SUEÑOS JUNTOS ═══════════ -->
+<section id="suenos">
+  <div class="sec-head rv">
+    <p class="lbl">Lo que viene</p>
+    <h2 class="sec-title">Sueños juntos</h2>
+  </div>
+  <div class="suenos-inner">
+
+    <p class="bucket-lbl rv" style="margin-bottom:1.4rem;">Viajes que queremos hacer</p>
+    <div class="act-grid rv rv2" style="margin-bottom:5rem;">
+      <div class="act-card">
+        <div class="act-photo" style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&q=80&fit=crop')"></div>
+        <div class="act-ov"></div><span class="act-nm">Costa Rica</span>
+      </div>
+      <div class="act-card">
+        <div class="act-photo" style="background-image:url('https://images.unsplash.com/photo-1542259009477-d625272157b7?w=500&q=80&fit=crop')"></div>
+        <div class="act-ov"></div><span class="act-nm">Hawaii</span>
+      </div>
+      <div class="act-card">
+        <div class="act-photo" style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&q=80&fit=crop')"></div>
+        <div class="act-ov"></div><span class="act-nm">El Mar</span>
+      </div>
+      <div class="act-card">
+        <div class="act-photo" style="background-image:url('https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=500&q=80&fit=crop')"></div>
+        <div class="act-ov"></div><span class="act-nm">Chipilo — barrio italiano</span>
+      </div>
+    </div>
+
+    <div class="bucket-sec">
+      <p class="bucket-lbl rv">En persona</p>
+      <div class="act-grid rv rv2">
+        <div class="act-card"><div class="act-photo" style="background-image:url('https://images.unsplash.com/photo-1574027597294-b44db2aef10d?w=500&q=80&fit=crop')"></div><div class="act-ov"></div><span class="act-nm">Bailar</span></div>
+        <div class="act-card"><div class="act-photo" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Puebla_Mexico_Temple.jpg/640px-Puebla_Mexico_Temple.jpg')"></div><div class="act-ov"></div><span class="act-nm">Ir al templo</span></div>
+        <div class="act-card"><div class="act-photo" style="background-image:url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=500&q=80&fit=crop')"></div><div class="act-ov"></div><span class="act-nm">Ir al gym juntos</span></div>
+        <div class="act-card"><div class="act-photo" style="background-image:url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=500&q=80&fit=crop')"></div><div class="act-ov"></div><span class="act-nm">Cocinar</span></div>
+        <div class="act-card"><div class="act-photo" style="background-image:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=500&q=80&fit=crop')"></div><div class="act-ov"></div><span class="act-nm">Ir a un restaurante</span></div>
+        <div class="act-card"><div class="act-photo" style="background-image:url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=500&q=80&fit=crop')"></div><div class="act-ov"></div><span class="act-nm">Caminar</span></div>
+        <div class="act-card"><div class="act-photo" style="background-image:url('https://images.unsplash.com/photo-1488085061387-422e29b40080?w=500&q=80&fit=crop')"></div><div class="act-ov"></div><span class="act-nm">Globo aerostático</span></div>
+        <div class="act-card"><div class="act-photo" style="background-image:url('https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?w=500&q=80&fit=crop')"></div><div class="act-ov"></div><span class="act-nm">Esquiar</span></div>
+        <div class="act-card"><div class="act-photo" style="background-image:url('https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=500&q=80&fit=crop')"></div><div class="act-ov"></div><span class="act-nm">Ir a un autocinema</span></div>
+        <div class="act-card"><div class="act-photo" style="background-image:url('https://images.unsplash.com/photo-1483985988355-763728e1935b?w=500&q=80&fit=crop')"></div><div class="act-ov"></div><span class="act-nm">Ir de compras (fingir que estamos casados)</span></div>
+        <div class="act-card"><div class="act-photo" style="background-image:url('https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=500&q=80&fit=crop')"></div><div class="act-ov"></div><span class="act-nm">Comprar anillos (fingir)</span></div>
+        <div class="act-card"><div class="act-photo" style="background-image:url('https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=500&q=80&fit=crop')"></div><div class="act-ov"></div><span class="act-nm">Comprar una casa (fingir)</span></div>
+        <div class="act-card"><div class="act-photo" style="background-image:url('https://images.unsplash.com/photo-1501854140801-50d01698950b?w=500&q=80&fit=crop')"></div><div class="act-ov"></div><span class="act-nm">Ir a la iglesia juntos</span></div>
+        <div class="act-card"><div class="act-photo" style="background-image:url('https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=500&q=80&fit=crop')"></div><div class="act-ov"></div><span class="act-nm">Ir al sauna</span></div>
+        <div class="act-card"><div class="act-photo" style="background-image:url('https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?w=500&q=80&fit=crop')"></div><div class="act-ov"></div><span class="act-nm">Tocar el piano</span></div>
+        <div class="act-card"><div class="act-photo" style="background-image:url('https://images.unsplash.com/photo-1546519638-68e109498ffc?w=500&q=80&fit=crop')"></div><div class="act-ov"></div><span class="act-nm">Jugar basquetbol</span></div>
+        <div class="act-card"><div class="act-photo" style="background-image:url('https://images.unsplash.com/photo-1554068865-24cecd4e34b8?w=500&q=80&fit=crop')"></div><div class="act-ov"></div><span class="act-nm">Jugar tenis</span></div>
+        <div class="act-card"><div class="act-photo" style="background-image:url('https://images.unsplash.com/photo-1536440136906-06b0f8d3c4b8?w=500&q=80&fit=crop')"></div><div class="act-ov"></div><span class="act-nm">Ver una película y abrazarnos</span></div>
+        <div class="act-card"><div class="act-photo" style="background-image:url('https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=500&q=80&fit=crop')"></div><div class="act-ov"></div><span class="act-nm">Ir en hamaca</span></div>
+        <div class="act-card"><div class="act-photo" style="background-image:url('https://images.unsplash.com/photo-1566127992631-137a642a90f4?w=500&q=80&fit=crop')"></div><div class="act-ov"></div><span class="act-nm">Ir a museos</span></div>
+        <div class="act-card"><div class="act-photo" style="background-image:url('https://images.unsplash.com/photo-1502744688674-c619d1586c9e?w=500&q=80&fit=crop')"></div><div class="act-ov"></div><span class="act-nm">Andar en bicicleta</span></div>
+        <div class="act-card"><div class="act-photo" style="background-image:url('https://images.unsplash.com/photo-1530549387789-4c1017266635?w=500&q=80&fit=crop')"></div><div class="act-ov"></div><span class="act-nm">Nadar juntos</span></div>
+        <div class="act-card"><div class="act-photo" style="background-image:url('https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=500&q=80&fit=crop')"></div><div class="act-ov"></div><span class="act-nm">Pintar</span></div>
+      </div>
+    </div>
+
+    <div class="bucket-sec">
+      <p class="bucket-lbl rv">En Utah</p>
+      <div class="act-grid rv rv2" style="grid-template-columns: repeat(2, 1fr); max-width: 540px;">
+        <div class="act-card"><div class="act-photo" style="background-image:url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=500&q=80&fit=crop')"></div><div class="act-ov"></div><span class="act-nm">Conferencia General</span></div>
+        <div class="act-card"><div class="act-photo" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Salt_Lake_Temple%2C_Utah.jpg/640px-Salt_Lake_Temple%2C_Utah.jpg')"></div><div class="act-ov"></div><span class="act-nm">Templo de la Manzana</span></div>
+      </div>
+    </div>
+
+    <div class="bucket-sec">
+      <p class="bucket-lbl rv">En línea</p>
+      <div class="act-grid rv rv2">
+        <div class="act-card"><div class="act-photo" style="background-image:url('https://images.unsplash.com/photo-1481627834876-b7833e8f5dc1?w=500&q=80&fit=crop')"></div><div class="act-ov"></div><span class="act-nm">Leer las escrituras</span></div>
+        <div class="act-card"><div class="act-photo" style="background-image:url('https://images.unsplash.com/photo-1528819622765-d6bcf132f793?w=500&q=80&fit=crop')"></div><div class="act-ov"></div><span class="act-nm">Jugar ajedrez</span></div>
+        <div class="act-card"><div class="act-photo" style="background-image:url('https://images.unsplash.com/photo-1516841273335-e1e93407efe0?w=500&q=80&fit=crop')"></div><div class="act-ov"></div><span class="act-nm">Basta</span></div>
+        <div class="act-card"><div class="act-photo" style="background-image:url('https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=500&q=80&fit=crop')"></div><div class="act-ov"></div><span class="act-nm">Lotería</span></div>
+        <div class="act-card"><div class="act-photo" style="background-image:url('https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?w=500&q=80&fit=crop')"></div><div class="act-ov"></div><span class="act-nm">Videojuegos</span></div>
+        <div class="act-card"><div class="act-photo" style="background-image:url('https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?w=500&q=80&fit=crop')"></div><div class="act-ov"></div><span class="act-nm">Verdad o reto</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════ TE AMO ═══════════ -->
+<section id="teamo" data-poem-big>
+  <div class="teamo-wrap">
+    <span class="teamo-big w">Te amo</span>
+    <span class="teamo-ln w">Carla Izel.</span>
+    <span class="teamo-ln w">Gracias por quedarte.</span>
+    <span class="teamo-ln w">Gracias por el 9 de diciembre.</span>
+  </div>
+</section>
+
+<!-- ═══════════ CARTA ═══════════ -->
+<section id="carta">
+  <div class="sec-head rv" style="max-width:640px;margin:0 auto 2.5rem;">
+    <p class="lbl lbl-gold">Solo para ti</p>
+    <h2 class="sec-title">Una carta para ti</h2>
+  </div>
+  <div class="carta-wrap rv rv2">
+    <div class="carta-paper">
+      <svg class="carta-seal" viewBox="0 0 40 40" fill="none">
+        <circle cx="20" cy="20" r="18" stroke="#8B6914" stroke-width="0.9"/>
+        <circle cx="20" cy="20" r="14" stroke="#8B6914" stroke-width="0.5" stroke-dasharray="2 2"/>
+        <text x="20" y="25" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="13" fill="#8B6914" font-style="italic">B</text>
+      </svg>
+      <div class="carta-hr"></div>
+      <p class="carta-to">Carla Izel,</p>
+      <div class="carta-body">
+        <p>Desde el primer mensaje supe que eras diferente. Hay algo en la manera en que hablas, en la forma en que amas las cosas pequeñas — un libro, una canción, los chilaquiles del domingo — que me hizo querer conocerte más.</p>
+        <p>Han sido seis meses de pantallas y horarios y kilómetros. Pero también han sido seis meses de las mejores conversaciones de mi vida, de risas que no esperaba, de aprender que la distancia no puede con lo que sentimos.</p>
+        <p>Gracias por quedarte. Gracias por esos "buenos días" y por esas llamadas que nunca querías terminar. Gracias por ser tú.</p>
+        <p>Esto es solo el principio de todo lo que quiero vivir contigo.</p>
+      </div>
+      <p class="carta-sig">— Ben</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <p class="ft-names">Ben &amp; Carla</p>
+  <p class="ft-song">9 de junio, 2026 &nbsp;·&nbsp; "La Distancia" — Manuel Medrano</p>
+  <p class="ft-love">Hecho con amor ♡</p>
+</footer>
+
+<script>
+(function () {
+  // ── PARALLAX HERO ──
+  const bg = document.getElementById('heroBg');
+  let raf = false;
+  window.addEventListener('scroll', function () {
+    if (!raf) {
+      requestAnimationFrame(function () {
+        bg.style.transform = 'translateY(' + (window.scrollY * 0.33) + 'px)';
+        raf = false;
+      });
+      raf = true;
+    }
+  }, { passive: true });
+
+  // ── REVEAL ON SCROLL ──
+  const ro = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('on'); ro.unobserve(e.target); }
+    });
+  }, { threshold: 0.14 });
+  document.querySelectorAll('.rv').forEach(function (el) { ro.observe(el); });
+
+  // ── POEM WORD ANIMATION ──
+  const po = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.w').forEach(function (w, i) {
+          setTimeout(function () { w.classList.add('on'); }, i * 105);
+        });
+        po.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('[data-poem]').forEach(function (el) { po.observe(el); });
+
+  // ── TE AMO BIG ──
+  const bo = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.w').forEach(function (w, i) {
+          setTimeout(function () { w.classList.add('on'); }, i * 620);
+        });
+        bo.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('[data-poem-big]').forEach(function (el) { bo.observe(el); });
+
+  // ── GALLERY STAGGER ──
+  const gg = document.getElementById('galGrid');
+  if (gg) {
+    const go = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          document.querySelectorAll('.gal-item').forEach(function (item, i) {
+            setTimeout(function () {
+              item.style.opacity = '1';
+              item.style.transform = 'none';
+            }, i * 55);
+          });
+          go.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.05 });
+    go.observe(gg);
+  }
+
+  // ── GALLERY CLICK ──
+  document.querySelectorAll('.gal-item').forEach(function (item) {
+    item.addEventListener('click', function () {
+      openLb(parseInt(item.getAttribute('data-i')));
+    });
+  });
+
+  // ── LIGHTBOX ──
+  var photos = [
+    './photos/IMG_5924.PNG','./photos/IMG_5953.PNG','./photos/IMG_6014.PNG',
+    './photos/IMG_6015.PNG','./photos/IMG_6016.PNG','./photos/IMG_6124.PNG',
+    './photos/IMG_6125.PNG','./photos/IMG_6126.PNG','./photos/IMG_6127.PNG',
+    './photos/IMG_6128.PNG','./photos/IMG_6129.PNG','./photos/IMG_6147.PNG',
+    './photos/IMG_6148.PNG','./photos/IMG_6151.JPG','./photos/IMG_6152.JPG',
+    './photos/IMG_6153.PNG','./photos/IMG_6154.PNG',
+    './photos/carla/IMG_5251.JPG','./photos/carla/IMG_5252.JPG','./photos/carla/IMG_5253.JPG',
+    './photos/carla/IMG_5851.PNG','./photos/carla/IMG_5908.PNG',
+    './photos/carla/09ebbb0e-0257-4ac1-a06a-e12f0ad7bcc9.JPG',
+    './photos/carla/a47541c4-8b55-4371-87fa-569f0f3aaf49.JPG',
+    './photos/carla/a5b219e7-4c53-41d8-b7a3-86b88fb33274.JPG',
+    './photos/carla/af99ad38-6698-48ef-92f1-ea25cc57ea1d.JPG',
+    './photos/carla/be79f80e-342a-49be-8ad3-b7ee86ca22c3.JPG',
+    './photos/carla/cd0927cb-63c6-43e4-ac0b-d6fb4b328490.JPG',
+    './photos/carla/fc6c9277-93d7-4340-94e2-d4f4d6e39519.JPG',
+    './photos/carla/IMG_6157.jpg'
+  ];
+  var cur = 0;
+  var lb = document.getElementById('lb');
+  var lbImg = document.getElementById('lbImg');
+  var lbCount = document.getElementById('lbCount');
+
+  function openLb(i) {
+    cur = i;
+    lbImg.src = photos[i];
+    lbCount.textContent = (i + 1) + ' / ' + photos.length;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLb() { lb.classList.remove('open'); document.body.style.overflow = ''; }
+  function showPhoto(i) {
+    cur = (i + photos.length) % photos.length;
+    lbImg.src = photos[cur];
+    lbCount.textContent = (cur + 1) + ' / ' + photos.length;
+  }
+
+  document.getElementById('lbX').addEventListener('click', closeLb);
+  document.getElementById('lbPrev').addEventListener('click', function () { showPhoto(cur - 1); });
+  document.getElementById('lbNext').addEventListener('click', function () { showPhoto(cur + 1); });
+  lb.addEventListener('click', function (e) { if (e.target === lb) closeLb(); });
+  document.addEventListener('keydown', function (e) {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLb();
+    if (e.key === 'ArrowLeft') showPhoto(cur - 1);
+    if (e.key === 'ArrowRight') showPhoto(cur + 1);
+  });
+
+  // ── ACTIVITY PHOTO ONERROR FALLBACK ──
+  document.querySelectorAll('.act-photo').forEach(function(el) {
+    var match = el.style.backgroundImage.match(/url\(["']?(.+?)["']?\)/);
+    if (!match) return;
+    var img = new Image();
+    img.onerror = function() {
+      el.style.backgroundImage = 'none';
+      el.parentElement.style.background = 'var(--sf2)';
+    };
+    img.src = match[1];
+  });
+
+  // ── SWIPE SUPPORT (LIGHTBOX) ──
+  var touchX = 0;
+  lb.addEventListener('touchstart', function (e) { touchX = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener('touchend', function (e) {
+    var dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 50) { showPhoto(dx < 0 ? cur + 1 : cur - 1); }
+  });
+}());
+</script>
+</body>
+</html>
