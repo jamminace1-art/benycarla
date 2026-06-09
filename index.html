@@ -4,7 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- AUTH GUARD: redirect to login if not authenticated -->
-  <script>if(localStorage.getItem('benycarla_auth')!=='1'){window.location.replace('./login.html');}</script>
+  <!-- Visit ?logout to clear your session and test the login page -->
+  <script>
+    if(new URLSearchParams(location.search).has('logout')){localStorage.removeItem('benycarla_auth');location.replace('./login.html');}
+    else if(localStorage.getItem('benycarla_auth')!=='1'){location.replace('./login.html');}
+  </script>
   <title>Carla Izel · 6 Meses</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -880,9 +884,32 @@
       }
       .gal-item { opacity: 1 !important; transform: none !important; }
     }
+    /* ── MUSIC BUTTON ── */
+    #musicBtn {
+      position: fixed;
+      bottom: 1.8rem;
+      right: 2rem;
+      z-index: 50;
+      background: rgba(13,19,32,0.85);
+      border: 1px solid var(--lineHi);
+      color: var(--muted);
+      width: 38px; height: 38px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: border-color 0.25s, color 0.25s;
+      backdrop-filter: blur(8px);
+      font-size: 0.85rem;
+    }
+    #musicBtn:hover { border-color: var(--gold); color: var(--gold); }
+    #musicBtn.playing { color: var(--gold); border-color: rgba(200,153,58,0.4); }
   </style>
 </head>
 <body>
+
+<audio id="bgMusic" src="./audio/Consider the Lilies Vocal.mp3" loop preload="auto"></audio>
+<button id="musicBtn" aria-label="Música">♪</button>
 
 <!-- ═══════════ HERO ═══════════ -->
 <section id="hero">
@@ -1485,6 +1512,40 @@
     var dx = e.changedTouches[0].clientX - touchX;
     if (Math.abs(dx) > 50) { showPhoto(dx < 0 ? cur + 1 : cur - 1); }
   });
+  // ── BACKGROUND MUSIC ──
+  var music = document.getElementById('bgMusic');
+  var musicBtn = document.getElementById('musicBtn');
+  var musicPlaying = false;
+
+  function startMusic() {
+    music.volume = 0.35;
+    music.play().then(function() {
+      musicPlaying = true;
+      musicBtn.classList.add('playing');
+      musicBtn.setAttribute('aria-label', 'Pausar música');
+    }).catch(function() {
+      // Autoplay blocked — show button so she can start it manually
+      musicBtn.style.display = 'flex';
+    });
+  }
+
+  musicBtn.addEventListener('click', function() {
+    if (musicPlaying) {
+      music.pause();
+      musicPlaying = false;
+      musicBtn.classList.remove('playing');
+      musicBtn.setAttribute('aria-label', 'Reproducir música');
+    } else {
+      music.play();
+      musicPlaying = true;
+      musicBtn.classList.add('playing');
+      musicBtn.setAttribute('aria-label', 'Pausar música');
+    }
+  });
+
+  // Attempt autoplay — succeeds when coming from login page (user just interacted)
+  startMusic();
+
 }());
 </script>
 </body>
