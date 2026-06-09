@@ -1090,8 +1090,10 @@
       <h2 class="pconv-title">Nuestra primera conversación</h2>
       <p class="pconv-desc">Antes de las llamadas, antes del "te amo" — hubo una conversación que lo empezó todo. Aquí está.</p>
     </div>
-    <div class="vid-wrap rv rv2" style="max-width:580px;" id="vidPrimeraConv" data-local="./videos/primera-convo.mp4" data-yt="">
-      <!-- rendered by JS below -->
+    <div class="vid-wrap rv rv2" style="max-width:580px;" id="vidPrimeraConvWrap">
+      <video id="vidPrimeraConv" controls preload="metadata" playsinline onerror="showVidPlaceholder('vidPrimeraConvWrap')">
+        <source src="./videos/primera-convo.mp4" type="video/mp4">
+      </video>
     </div>
     <p class="vid-caption rv rv3" style="max-width:580px;margin:1.4rem auto 0;">El principio de todo</p>
   </div>
@@ -1173,8 +1175,10 @@
     <p class="lbl">En pantalla</p>
     <h2 class="sec-title">Nuestras llamadas</h2>
   </div>
-  <div class="vid-wrap rv rv2" id="vidLlamadas" data-local="./videos/calls.mp4" data-yt="">
-    <!-- rendered by JS below -->
+  <div class="vid-wrap rv rv2" id="vidLlamadasWrap">
+    <video id="vidLlamadas" controls preload="metadata" playsinline onerror="showVidPlaceholder('vidLlamadasWrap')">
+      <source src="./videos/calls.mp4" type="video/mp4">
+    </video>
   </div>
   <p class="vid-caption rv rv3" style="max-width:880px;margin:1.4rem auto 0;">Cada llamada fue un abrazo a distancia</p>
   </div>
@@ -1220,7 +1224,7 @@
     <div class="bucket-sec">
       <p class="bucket-lbl rv">En persona</p>
       <div class="act-grid rv rv2">
-        <div class="act-card"><div class="act-photo" style="background-image:url('https://images.unsplash.com/photo-1504609813442-a8924e83f501?w=500&q=80&fit=crop')"></div><div class="act-ov"></div><span class="act-nm">Bailar</span></div>
+        <div class="act-card"><div class="act-photo" style="background-image:url('https://images.unsplash.com/photo-1545959570-a94084071b5d?w=500&q=80&fit=crop')"></div><div class="act-ov"></div><span class="act-nm">Bailar</span></div>
         <div class="act-card"><div class="act-photo" style="background-image:url('./photos/carla/puebla templo.jpeg')"></div><div class="act-ov"></div><span class="act-nm">Ir al templo</span></div>
         <div class="act-card"><div class="act-photo" style="background-image:url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=500&q=80&fit=crop')"></div><div class="act-ov"></div><span class="act-nm">Ir al gym juntos</span></div>
         <div class="act-card"><div class="act-photo" style="background-image:url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=500&q=80&fit=crop')"></div><div class="act-ov"></div><span class="act-nm">Cocinar</span></div>
@@ -1315,48 +1319,31 @@
 <script>
 (function () {
   // ── VIDEO SETUP ──────────────────────────────────────────────
-  // To show videos on the live site, upload each video to YouTube
-  // as Unlisted, then paste just the video ID (e.g. "dQw4w9WgXcQ")
-  // into the constants below.
-  var YT_LLAMADAS     = '';   // ← paste YouTube ID for "Nuestras Llamadas"
-  var YT_PRIMERA_CONV = '';   // ← paste YouTube ID for "Nuestra Primera Conversación"
+  // To show videos on the live site, upload each to YouTube as
+  // Unlisted and paste the video ID (the part after ?v=) below.
+  var YT_LLAMADAS     = '';   // ← YouTube ID for "Nuestras Llamadas"
+  var YT_PRIMERA_CONV = '';   // ← YouTube ID for "Nuestra Primera Conversación"
   // ─────────────────────────────────────────────────────────────
 
-  function renderVideo(el, ytId) {
-    if (!el) return;
-    var local = el.getAttribute('data-local');
-    if (ytId) {
-      el.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + ytId +
-        '?rel=0&modestbranding=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
-    } else if (local) {
-      // Try local file; if it fails (live site), show placeholder
-      var v = document.createElement('video');
-      v.controls = true; v.preload = 'metadata'; v.playsInline = true;
-      v.style.width = '100%'; v.style.display = 'block'; v.style.outline = 'none';
-      var s = document.createElement('source');
-      s.src = local; s.type = 'video/mp4';
-      v.appendChild(s);
-      v.onerror = function() { showPlaceholder(el); };
-      s.onerror = function() { showPlaceholder(el); };
-      el.appendChild(v);
-      // Also check after a short delay if the video loaded at all
-      setTimeout(function() {
-        if (v.readyState === 0 && v.networkState === 3) showPlaceholder(el);
-      }, 2500);
-    } else {
-      showPlaceholder(el);
-    }
-  }
-
-  function showPlaceholder(el) {
-    el.innerHTML = '<div class="vid-placeholder">' +
+  function showVidPlaceholder(wrapId) {
+    var el = document.getElementById(wrapId);
+    if (el) el.innerHTML = '<div class="vid-placeholder">' +
       '<span class="vid-placeholder-icon">▶</span>' +
       '<span class="vid-placeholder-text">Próximamente</span>' +
       '</div>';
   }
 
-  renderVideo(document.getElementById('vidLlamadas'),    YT_LLAMADAS);
-  renderVideo(document.getElementById('vidPrimeraConv'), YT_PRIMERA_CONV);
+  // If a YouTube ID is set, swap the local <video> for an iframe
+  if (YT_LLAMADAS) {
+    document.getElementById('vidLlamadasWrap').innerHTML =
+      '<iframe src="https://www.youtube-nocookie.com/embed/' + YT_LLAMADAS +
+      '?rel=0&modestbranding=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+  }
+  if (YT_PRIMERA_CONV) {
+    document.getElementById('vidPrimeraConvWrap').innerHTML =
+      '<iframe src="https://www.youtube-nocookie.com/embed/' + YT_PRIMERA_CONV +
+      '?rel=0&modestbranding=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+  }
 
   // ── PARALLAX HERO ──
   const bg = document.getElementById('heroBg');
