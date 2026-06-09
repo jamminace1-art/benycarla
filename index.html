@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- AUTH GUARD: redirect to login if not authenticated -->
+  <script>if(localStorage.getItem('benycarla_auth')!=='1'){window.location.replace('./login.html');}</script>
   <title>Carla Izel · 6 Meses</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -552,6 +554,33 @@
       display: block;
       outline: none;
     }
+    .vid-wrap iframe {
+      width: 100%;
+      aspect-ratio: 16/9;
+      display: block;
+      border: none;
+    }
+    .vid-placeholder {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--sf2);
+      border: 1px solid var(--lineHi);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+    }
+    .vid-placeholder-icon {
+      font-size: 1.8rem;
+      opacity: 0.3;
+    }
+    .vid-placeholder-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--muted);
+    }
     .vid-caption {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
@@ -1061,12 +1090,10 @@
       <h2 class="pconv-title">Nuestra primera conversación</h2>
       <p class="pconv-desc">Antes de las llamadas, antes del "te amo" — hubo una conversación que lo empezó todo. Aquí está.</p>
     </div>
-    <div class="vid-wrap rv rv2" style="max-width:580px;">
-      <video controls preload="metadata" playsinline>
-        <source src="./videos/primera-convo.mp4" type="video/mp4">
-      </video>
-      <p class="vid-caption">El principio de todo</p>
+    <div class="vid-wrap rv rv2" style="max-width:580px;" id="vidPrimeraConv" data-local="./videos/primera-convo.mp4" data-yt="">
+      <!-- rendered by JS below -->
     </div>
+    <p class="vid-caption rv rv3" style="max-width:580px;margin:1.4rem auto 0;">El principio de todo</p>
   </div>
 </section>
 
@@ -1146,11 +1173,10 @@
     <p class="lbl">En pantalla</p>
     <h2 class="sec-title">Nuestras llamadas</h2>
   </div>
-  <div class="vid-wrap rv rv2">
-    <video controls preload="metadata" playsinline>
-      <source src="./videos/calls.mp4" type="video/mp4">
-    </video>
-    <p class="vid-caption">Cada llamada fue un abrazo a distancia</p>
+  <div class="vid-wrap rv rv2" id="vidLlamadas" data-local="./videos/calls.mp4" data-yt="">
+    <!-- rendered by JS below -->
+  </div>
+  <p class="vid-caption rv rv3" style="max-width:880px;margin:1.4rem auto 0;">Cada llamada fue un abrazo a distancia</p>
   </div>
 </section>
 
@@ -1288,6 +1314,50 @@
 
 <script>
 (function () {
+  // ── VIDEO SETUP ──────────────────────────────────────────────
+  // To show videos on the live site, upload each video to YouTube
+  // as Unlisted, then paste just the video ID (e.g. "dQw4w9WgXcQ")
+  // into the constants below.
+  var YT_LLAMADAS     = '';   // ← paste YouTube ID for "Nuestras Llamadas"
+  var YT_PRIMERA_CONV = '';   // ← paste YouTube ID for "Nuestra Primera Conversación"
+  // ─────────────────────────────────────────────────────────────
+
+  function renderVideo(el, ytId) {
+    if (!el) return;
+    var local = el.getAttribute('data-local');
+    if (ytId) {
+      el.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + ytId +
+        '?rel=0&modestbranding=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+    } else if (local) {
+      // Try local file; if it fails (live site), show placeholder
+      var v = document.createElement('video');
+      v.controls = true; v.preload = 'metadata'; v.playsInline = true;
+      v.style.width = '100%'; v.style.display = 'block'; v.style.outline = 'none';
+      var s = document.createElement('source');
+      s.src = local; s.type = 'video/mp4';
+      v.appendChild(s);
+      v.onerror = function() { showPlaceholder(el); };
+      s.onerror = function() { showPlaceholder(el); };
+      el.appendChild(v);
+      // Also check after a short delay if the video loaded at all
+      setTimeout(function() {
+        if (v.readyState === 0 && v.networkState === 3) showPlaceholder(el);
+      }, 2500);
+    } else {
+      showPlaceholder(el);
+    }
+  }
+
+  function showPlaceholder(el) {
+    el.innerHTML = '<div class="vid-placeholder">' +
+      '<span class="vid-placeholder-icon">▶</span>' +
+      '<span class="vid-placeholder-text">Próximamente</span>' +
+      '</div>';
+  }
+
+  renderVideo(document.getElementById('vidLlamadas'),    YT_LLAMADAS);
+  renderVideo(document.getElementById('vidPrimeraConv'), YT_PRIMERA_CONV);
+
   // ── PARALLAX HERO ──
   const bg = document.getElementById('heroBg');
   let raf = false;
